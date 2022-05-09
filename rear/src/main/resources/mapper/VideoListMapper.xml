@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.lucian.dictionary.dao.VideoListMapper">
+	<resultMap id="BaseResultMap" type="top.lucian.dictionary.entity.VideoList">
+            <result column="id" property="id" />
+	        <result column="name" property="name" />
+	        <result column="videoUrl" property="videoUrl" />
+	        <result column="watchNum" property="watchNum" />
+	        <result column="poster" property="poster" />
+	        <result column="title" property="title" />
+		</resultMap>  
+    
+    <!-- 表字段 -->
+    <sql id="baseColumns">
+         t.id
+        , t.name
+        , t.videoUrl
+        , t.watchNum
+        , t.poster
+        , t.title
+        </sql> 
+    
+    <!-- 查询全部 -->
+    <select id="listAll" resultMap="BaseResultMap">
+		SELECT         
+        	<include refid="baseColumns" />
+		FROM videoList t
+	</select>
+ 
+ 	<!-- 根据主键获取单条记录 -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT         
+        	<include refid="baseColumns" />
+		FROM videoList t
+		WHERE id = #{id}
+	</select>
+
+	<!-- 插入全部字段 -->
+    <insert id="insert" parameterType="top.lucian.dictionary.entity.VideoList"
+		keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+	INSERT INTO videoList
+    <trim prefix="(" suffix=")" suffixOverrides=",">	 
+        	        	    	name,
+    	        	    	videoUrl,
+    	        	    	watchNum,
+    	        	    	poster,
+    	        	    	title,
+    	        </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+        	        	        #{name},                   
+    	        	        #{videoUrl},                   
+    	        	        #{watchNum},                   
+    	        	        #{poster},                   
+    	        	        #{title},                   
+    	        </trim>
+	</insert>
+    
+    <!-- 插入不为NULL的字段 -->
+    <insert id="insertIgnoreNull" parameterType="top.lucian.dictionary.entity.VideoList"
+        keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+        >
+        INSERT INTO videoList    
+        <trim prefix="(" suffix=")" suffixOverrides=",">	 
+
+                                                                            <if test="name != null">
+                   name,
+                    </if>
+                                                                <if test="videoUrl != null">
+                   videoUrl,
+                    </if>
+                                                                <if test="watchNum != null">
+                   watchNum,
+                    </if>
+                                                                <if test="poster != null">
+                   poster,
+                    </if>
+                                                                <if test="title != null">
+                   title,
+                    </if>
+                                    </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                                                                            <if test="name != null" >
+                    #{name},                    
+                    </if>
+                                                                <if test="videoUrl != null" >
+                    #{videoUrl},                    
+                    </if>
+                                                                <if test="watchNum != null" >
+                    #{watchNum},                    
+                    </if>
+                                                                <if test="poster != null" >
+                    #{poster},                    
+                    </if>
+                                                                <if test="title != null" >
+                    #{title},                    
+                    </if>
+                                    </trim>
+    </insert>
+
+	<!-- 更新,更新全部字段 -->
+    <update id="update" parameterType="top.lucian.dictionary.entity.VideoList">
+    UPDATE videoList
+     <set>		
+                                     name=#{name},        
+                                videoUrl=#{videoUrl},        
+                                watchNum=#{watchNum},        
+                                poster=#{poster},        
+                                title=#{title},        
+                   </set>	
+    WHERE id = #{id}
+    </update>  
+    
+    <!-- 更新不为NULL的字段 -->
+    <update id="updateIgnoreNull" parameterType="top.lucian.dictionary.entity.VideoList">
+    UPDATE videoList
+    <set>
+    	                                                <if test="name != null" >
+                name=#{name},                 
+                </if>
+                                                <if test="videoUrl != null" >
+                videoUrl=#{videoUrl},                 
+                </if>
+                                                <if test="watchNum != null" >
+                watchNum=#{watchNum},                 
+                </if>
+                                                <if test="poster != null" >
+                poster=#{poster},                 
+                </if>
+                                                <if test="title != null" >
+                title=#{title},                 
+                </if>
+                        </set>
+    WHERE id = #{id}
+    </update>
+
+		
+	<!-- 根据主键删除记录 -->
+	<delete id="delete" parameterType="top.lucian.dictionary.entity.VideoList">
+		UPDATE videoList
+		SET is_deleted=1
+		WHERE id = #{id}
+	</delete>
+
+
+</mapper>

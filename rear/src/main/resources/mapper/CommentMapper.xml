@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.lucian.dictionary.dao.CommentMapper">
+
+    <select id="getAllByArticleId" parameterType="Integer" resultType="top.lucian.dictionary.entity.Comment">
+        select *
+        from comment
+        where article_id = #{articleId}
+    </select>
+
+    <select id="count" parameterType="Integer" resultType="Integer">
+        select count(#{articleId})
+        from comment;
+    </select>
+
+    <select id="like" parameterType="Integer" resultType="String">
+        select `like`
+        from comment
+        where id = #{commentId};
+    </select>
+
+    <insert id="addComment">
+        insert into comment(id, article_id, comment_user_id, parent_id, content)
+        values (null, #{articleId}, #{userId}, #{pId}, #{content});
+    </insert>
+
+    <update id="likeComment">
+        update comment
+        set `like` = #{userId}
+        where id = #{commentId};
+    </update>
+
+    <delete id="delCommentById" parameterType="Integer">
+        delete from comment where id = #{commentId}
+    </delete>
+
+    <delete id="deleteChildCommentById" parameterType="Integer">
+        delete from comment where parent_id = #{pId}
+    </delete>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.lucian.dictionary.dao.CarouselMapper">
+    <resultMap id="BaseResultMap" type="top.lucian.dictionary.entity.Carousel">
+        <result column="id" property="id"/>
+        <result column="item_id" property="itemId"/>
+        <result column="imageUrl" property="imageUrl"/>
+    </resultMap>
+
+    <!-- 表字段 -->
+    <sql id="baseColumns">
+        t
+        .
+        id
+        , t.item_id
+        , t.imageUrl
+    </sql>
+
+    <!-- 查询全部 -->
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM carousel t
+    </select>
+
+    <!-- 根据主键获取单条记录 -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM carousel t
+        WHERE id = #{id}
+    </select>
+
+    <!-- 插入全部字段 -->
+    <insert id="insert" parameterType="top.lucian.dictionary.entity.Carousel"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+        INSERT INTO carousel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            item_id,
+            imageUrl,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            #{itemId},
+            #{imageUrl},
+        </trim>
+    </insert>
+
+    <!-- 插入不为NULL的字段 -->
+    <insert id="insertIgnoreNull" parameterType="top.lucian.dictionary.entity.Carousel"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+        INSERT INTO carousel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="itemId != null">
+                item_id,
+            </if>
+            <if test="imageUrl != null">
+                imageUrl,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="itemId != null">
+                #{itemId},
+            </if>
+            <if test="imageUrl != null">
+                #{imageUrl},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 更新,更新全部字段 -->
+    <update id="update" parameterType="top.lucian.dictionary.entity.Carousel">
+        UPDATE carousel
+        <set>
+            item_id=#{itemId},
+            imageUrl=#{imageUrl},
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 更新不为NULL的字段 -->
+    <update id="updateIgnoreNull" parameterType="top.lucian.dictionary.entity.Carousel">
+        UPDATE carousel
+        <set>
+            <if test="itemId != null">
+                item_id=#{itemId},
+            </if>
+            <if test="imageUrl != null">
+                imageUrl=#{imageUrl},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+
+    <!-- 根据主键删除记录 -->
+    <delete id="delete" parameterType="top.lucian.dictionary.entity.Carousel">
+        UPDATE carousel
+        SET is_deleted=1
+        WHERE id = #{id}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.lucian.dictionary.dao.WaterfallMapper">
+    <resultMap id="BaseResultMap" type="top.lucian.dictionary.entity.Waterfall">
+        <result column="clickNumber" property="clickNumber"/>
+        <result column="content" property="content"/>
+        <result column="id" property="id"/>
+        <result column="imageUrl" property="imageUrl"/>
+        <result column="isClick" property="isClick"/>
+        <result column="isCollect" property="isCollect"/>
+        <result column="title" property="title"/>
+        <result column="userid" property="userid"/>
+    </resultMap>
+
+    <!-- 表字段 -->
+    <sql id="baseColumns">
+        t
+        .
+        clickNumber
+        , t.content
+        , t.id
+        , t.imageUrl
+        , t.isClick
+        , t.isCollect
+        , t.title
+        , t.userid
+    </sql>
+
+    <!-- 查询全部 -->
+    <select id="listAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM waterfall t
+    </select>
+
+    <!-- 查询数据总数 -->
+    <select id="countAll" resultType="Integer">
+        SELECT count(*)
+        FROM waterfall t
+    </select>
+
+    <update id="updateLike" parameterType="Integer">
+        update waterfall
+        set isClick = #{isClick}
+        where id = #{id}
+    </update>
+
+    <!-- 根据主键获取单条记录 -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+        SELECT
+        <include refid="baseColumns"/>
+        FROM waterfall t
+        WHERE id = #{id}
+    </select>
+
+    <!-- 插入全部字段 -->
+    <insert id="insert" parameterType="top.lucian.dictionary.entity.Waterfall"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+        INSERT INTO waterfall
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            clickNumber,
+            content,
+            imageUrl,
+            isClick,
+            isCollect,
+            title,
+            userid,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            #{clickNumber},
+            #{content},
+            #{imageUrl},
+            #{isClick},
+            #{isCollect},
+            #{title},
+            #{userid},
+        </trim>
+    </insert>
+
+    <!-- 插入不为NULL的字段 -->
+    <insert id="insertIgnoreNull" parameterType="top.lucian.dictionary.entity.Waterfall"
+            keyProperty="id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO waterfall
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="clickNumber != null">
+                clickNumber,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="imageUrl != null">
+                imageUrl,
+            </if>
+            <if test="isClick != null">
+                isClick,
+            </if>
+            <if test="isCollect != null">
+                isCollect,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="clickNumber != null">
+                #{clickNumber},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="imageUrl != null">
+                #{imageUrl},
+            </if>
+            <if test="isClick != null">
+                #{isClick},
+            </if>
+            <if test="isCollect != null">
+                #{isCollect},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="userid != null">
+                #{userid},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 更新,更新全部字段 -->
+    <update id="update" parameterType="top.lucian.dictionary.entity.Waterfall">
+        UPDATE waterfall
+        <set>
+            clickNumber=#{clickNumber},
+            content=#{content},
+            imageUrl=#{imageUrl},
+            isClick=#{isClick},
+            isCollect=#{isCollect},
+            title=#{title},
+            userid=#{userid},
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 更新不为NULL的字段 -->
+    <update id="updateIgnoreNull" parameterType="top.lucian.dictionary.entity.Waterfall">
+        UPDATE waterfall
+        <set>
+            <if test="clickNumber != null">
+                clickNumber=#{clickNumber},
+            </if>
+            <if test="content != null">
+                content=#{content},
+            </if>
+            <if test="imageUrl != null">
+                imageUrl=#{imageUrl},
+            </if>
+            <if test="isClick != null">
+                isClick=#{isClick},
+            </if>
+            <if test="isCollect != null">
+                isCollect=#{isCollect},
+            </if>
+            <if test="title != null">
+                title=#{title},
+            </if>
+            <if test="userid != null">
+                userid=#{userid},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据主键删除记录 -->
+    <delete id="delete" parameterType="top.lucian.dictionary.entity.Waterfall">
+        UPDATE waterfall
+        SET is_deleted=1
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.lucian.dictionary.dao.VocabularyMapper">
+
+    <select id="selectNoReviewWords" parameterType="Integer" resultType="top.lucian.dictionary.entity.Vocabulary">
+        select *
+        from vocabularyList
+        where bookid = #{bookid}
+          and userid = #{userid}
+          and isReview = 0
+    </select>
+
+    <select id="getNoReviewedWordByLimit" parameterType="Integer" resultType="top.lucian.dictionary.entity.Vocabulary">
+        select *
+        from vocabularyList
+        where bookid = #{bookid}
+          and userid = #{userid}
+          and isReview = 0 limit 0,#{limit}
+    </select>
+
+    <select id="selectReviewWords" parameterType="Integer" resultType="top.lucian.dictionary.entity.Vocabulary">
+        select *
+        from vocabularyList
+        where bookid = #{bookid}
+          and userid = #{userid}
+          and isReview = 1
+    </select>
+
+    <insert id="addVocabulary" parameterType="top.lucian.dictionary.entity.Vocabulary">
+        insert into vocabularyList(vocabularyid, bookid, userid, name, english, american, apology, isReview, isAdd,
+                                   state)
+        values (null, #{bookid}, #{userid}, #{name}, #{english}, #{american}, #{apology}, #{isReview}, #{isAdd}, -1);
+    </insert>
+
+    <select id="isExist" resultType="Integer">
+        select isAdd
+        from vocabularyList
+        where name = #{name}
+          and userid = #{userid};
+    </select>
+
+    <update id="review" parameterType="Integer">
+        update vocabularyList
+        set isReview = #{isReview},
+            state    = #{type}
+        where vocabularyid = #{vocid}
+    </update>
+
+    <delete id="deleteAllWords">
+        delete from vocabularyList where name in
+        <foreach collection="words" item="word" separator="," open="(" close=")">
+            #{word}
+        </foreach>
+    </delete>
+
+    <delete id="deleteWord" parameterType="Integer">
+        delete from vocabularyList where vocabularyid = #{vocid}
+    </delete>
+
+
+</mapper>

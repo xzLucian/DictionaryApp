@@ -1,0 +1,143 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "有赞词典"
+				// "navigationStyle": "custom" // 隐藏系统导航栏
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/study/study",
+			"style": {
+				"navigationBarTitleText": "英语学习"
+			}
+
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索结果"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "用户登录"
+				// "navigationStyle": "custom" // 隐藏系统导航栏
+			}
+
+		}, {
+			"path": "pages/index/detail/detail",
+			"style": {
+				// "navigationStyle": "custom" // 隐藏系统导航栏
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/translate/translate",
+			"style": {
+				"navigationBarTitleText": "中英互译"
+				// "navigationStyle": "custom" // 隐藏系统导航栏
+			}
+		}, {
+			"path": "pages/mine/setting/setting",
+			"style": {
+				// "navigationStyle": "custom" // 隐藏系统导航栏
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/editName/editName",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/uploadPic/uploadPic",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/vocabulary/vocabulary",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/vocabulary/reciteVocabulary/reciteVocabulary",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/login/registration",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/login/forget-password",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/modifyPass/modifyPass",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/icon/home.svg",
+			"selectedIconPath": "static/icon/home-full.svg",
+			"text": "主页"
+		}, {
+			"pagePath": "pages/study/study",
+			"iconPath": "static/icon/study.svg",
+			"selectedIconPath": "static/icon/study-full.svg",
+			"text": "学习"
+		}, {
+			"pagePath": "pages/translate/translate",
+			"iconPath": "static/icon/translate.svg",
+			"selectedIconPath": "static/icon/translate-full.svg",
+			"text": "翻译"
+		}, {
+			"pagePath": "pages/mine/mine",
+			"iconPath": "static/icon/mine.svg",
+			"selectedIconPath": "static/icon/mine-full.svg",
+			"text": "我的"
+		}]
+	}
+}
